@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageId>RW</PackageId>
+        <Description>The `ResultWrapper` package provides a set of static methods in the
+            `ResultWrapper` class, allowing you to easily create and work with success and failure
+            scenarios. These wrappers encapsulate various data, including payloads, errors, success
+            and error messages, status codes, and pagination information, providing a standardized
+            way to handle and represent the results of operations.
+            Why to use? The main benefit of this package is to provide access
+            to strongly typed and loosely typed payloads, errors, message and status code. By using
+            this package, the returned response will only
+            include the properties that you have explicitly returned. It ensures that no extra keys
+            are
+            included in the response.</Description>
+        <Authors>Ahsan Joyia</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Company>InnovatorBrains</Company>
+        <RepositoryUrl>https://github.com/InnovatorBrains/ResultWrapper</RepositoryUrl>
+        <PackageTags>Result Wrapper, Response Wrapper, Api Response, Service Response, Generic Api
+            Response, Generic Result Wrapper, Standard Api Response</PackageTags>
+        <PackageIcon>Innovator Brains Website Dark Logo.png</PackageIcon>
+        <Title>Result Wrapper</Title>
+        <Version>1.0</Version>
+        <PackageProjectUrl>https://github.com/InnovatorBrains/ResultWrapper</PackageProjectUrl>
+        <Copyright>Copyright @2023 - InnovatorBrains</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="C:\Users\AhsanJoyia\Desktop\Innovator Brains Website Dark Logo.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+</Project>
