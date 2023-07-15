@@ -12,3 +12,9 @@ Version 1.0.1
 🐛 [Bug Fix] Fixed issues in the README.md file and updated the package description.
 
 📝 In this version, we have resolved various issues and inconsistencies present in the README.md file. Additionally, we have also improved the package description to provide clearer and more accurate information about the ResultWrapper package.
+
+Version 1.0.2
+💡 [Enhancement] Added missing success overload for payload and pagina…
+…tion.
+
+📝 This release introduces a new success overload that accepts payload and pagination as parameters, providing developers with the flexibility to omit the message and status code in the response when necessary.

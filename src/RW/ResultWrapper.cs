@@ -27,6 +27,10 @@ public static class ResultWrapper
     {
         return new SuccessPayloadStatus<TPayload>(payload, message, code);
     }
+    public static IResultWrapper<TPayload> Success<TPayload>(TPayload? payload, Pagination paginationInfo)
+    {
+        return new SuccessPaginated<TPayload>(payload, paginationInfo);
+    }
     public static IResultWrapper<TPayload> Success<TPayload>(TPayload? payload, Pagination paginationInfo, string message, int code)
     {
         return new SuccessDetailed<TPayload>(payload, message, code, paginationInfo);
@@ -48,6 +52,10 @@ public static class ResultWrapper
     public static IResultWrapper Success<TPayload>(object? payload, string message, int code)
     {
         return new SuccessPayloadStatus<object>(payload, message, code);
+    }
+    public static IResultWrapper Success<TPayload>(object? payload, Pagination paginationInfo)
+    {
+        return new SuccessPaginated<object>(payload, paginationInfo);
     }
     public static IResultWrapper Success<TPayload>(object? payload, Pagination paginationInfo, string message, int code)
     {
