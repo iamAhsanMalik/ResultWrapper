@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -26,7 +26,7 @@
             Response, Generic Result Wrapper, Standard Api Response</PackageTags>
         <PackageIcon>Innovator Brains Website Dark Logo.png</PackageIcon>
         <Title>Result Wrapper</Title>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <PackageProjectUrl>https://github.com/InnovatorBrains/ResultWrapper</PackageProjectUrl>
         <Copyright>Copyright @2023 - InnovatorBrains</Copyright>
         <PackageReleaseNotes>CHANGELOG.md</PackageReleaseNotes>

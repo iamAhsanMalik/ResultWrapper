@@ -14,7 +14,11 @@ Version 1.0.1
 📝 In this version, we have resolved various issues and inconsistencies present in the README.md file. Additionally, we have also improved the package description to provide clearer and more accurate information about the ResultWrapper package.
 
 Version 1.0.2
-💡 [Enhancement] Added missing success overload for payload and pagina…
-…tion.
+💡 [Enhancement] Added missing success overload for payload and paginations.
 
 📝 This release introduces a new success overload that accepts payload and pagination as parameters, providing developers with the flexibility to omit the message and status code in the response when necessary.
+
+Version 1.0.3
+💡 [Enhancement] Added an extension method to convert loosely typed payload to strongly typed payload.
+
+📝 This release introduces a new extension method to support payload conversion, updates the pagination class to a record type, adds a non-generic use of ResultWrapper in the documentation, and upgrades the project from .NET 6 to .NET 8 for improved performance and features.

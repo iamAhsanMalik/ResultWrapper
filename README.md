@@ -188,5 +188,42 @@ public static class WeatherForecast
 }
 ```
 
+```csharp
+public static class WeatherForecast
+{
+    public static IResultWrapper GetWeatherInfo()
+    {
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+        var result = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecastInfo
+                (
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+        if (result != null)
+        {
+            return ResultWrapper.Success(result, "Hello", 300);
+        }
+        return ResultWrapper.Failure("Not Found", 404);
+    }
+
+    public void ReturnWeatherInfo()
+    {
+        IResultWrapper? weatherInfo = GetWeatherInfo();
+        // I am using non generic version; that's why the payload will be of type object.
+        object? payload = weatherInfo.Payload;
+        // To convert weatherInfo.Payload to strongly typed just use this extension.
+        WeatherForecastInfo[]? payload = weatherInfo.Payload?.ConvertToType<WeatherForecastInfo[]>();
+        bool isSuccess = weatherInfo.IsSuccess;
+        string message = weatherInfo.Message;
+        int statusCode = weatherInfo.Code;
+        var errors = weatherInfo.Errors;
+    }
+}
+```
+
 #### Conclusion
 The ResultWrapper package simplifies the process of creating and working with result success and failure scenarios. It provides a consistent way to handle and represent the results
