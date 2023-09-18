@@ -22,3 +22,10 @@ Version 1.0.3
 💡 [Enhancement] Added an extension method to convert loosely typed payload to strongly typed payload.
 
 📝 This release introduces a new extension method to support payload conversion, updates the pagination class to a record type, adds a non-generic use of ResultWrapper in the documentation, and upgrades the project from .NET 6 to .NET 8 for improved performance and features.
+
+Version 1.0.4
+🚀 [Enhancement] Introducing TypedPayload Property in IResultWrapper for Strongly Typed Payload Access
+
+📦 Changes: Removed the previously existing extension method used for converting loosely typed payloads to strongly typed ones.
+
+📝 This release introduces the TypedPayload property within the Non-Generic IResultWrapper interface, providing a streamlined method to access strongly typed payloads. Additionally, we've deprecated the previous extension method used for payload conversion, simplifying your codebase and enhancing overall clarity.

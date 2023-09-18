@@ -152,78 +152,115 @@ var result = ResultWrapper.Failure(errors, "Error message", 500);
 Note: The result wrapper will return a payload of type WeatherForecastInfo[] when using a generic approach.
 However, when a non-generic approach is used, the payload will be of type object.
 
-```csharp
-public static class WeatherForecast
-{
-    public static IResultWrapper<WeatherForecastInfo[]> GetWeatherInfo()
-    {
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-
-        var result = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecastInfo
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-                .ToArray();
-        if (result != null)
-        {
-            return ResultWrapper.Success<WeatherForecastInfo[]>(result, "Hello", 300);
-        }
-        return ResultWrapper.Failure<WeatherForecastInfo[]>("Not Found", 404);
-    }
-
-    public void ReturnWeatherInfo()
-    {
-        IResultWrapper<WeatherForecastInfo[]>? weatherInfo = GetWeatherInfo();
-        // I am using generic version; that's why the payload will be of type WeatherForecastInfo[].
-        WeatherForecastInfo[]? payload = weatherInfo.Payload;
-        bool isSuccess = weatherInfo.IsSuccess;
-        string message = weatherInfo.Message;
-        int statusCode = weatherInfo.Code;
-        var errors = weatherInfo.Errors;
-    }
-
-}
-```
+#### Example: How to use Non Generic IResultWrapper
 
 ```csharp
-public static class WeatherForecast
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
 {
-    public static IResultWrapper GetWeatherInfo()
-    {
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
 
-        var result = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecastInfo
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-                .ToArray();
-        if (result != null)
-        {
-            return ResultWrapper.Success(result, "Hello", 300);
-        }
-        return ResultWrapper.Failure("Not Found", 404);
-    }
+	[HttpGet(Name = "GetWeatherForecast")]
+	public ActionResult Get()
+	{
+		var result = Weather.GetWeatherInfo();
 
-    public void ReturnWeatherInfo()
-    {
-        IResultWrapper? weatherInfo = GetWeatherInfo();
-        // I am using non generic version; that's why the payload will be of type object.
-        object? payload = weatherInfo.Payload;
-        // To convert weatherInfo.Payload to strongly typed just use this extension.
-        WeatherForecastInfo[]? payload = weatherInfo.Payload?.ConvertToType<WeatherForecastInfo[]>();
-        bool isSuccess = weatherInfo.IsSuccess;
-        string message = weatherInfo.Message;
-        int statusCode = weatherInfo.Code;
-        var errors = weatherInfo.Errors;
-    }
+		/*
+		// These are the properties available in IResultWrapper
+		var payload = result.Payload; // To get the payload
+		bool isSuccess = result.IsSuccess; // To check whether a success case is returned or a failure
+		string message = result.Message; // Get the failure or success message if you have passed it as an argument
+		int statusCode = result.Code; // Get the failure or success codes if you have passed them as arguments
+		var errors = result.Errors; // To get a list of errors
+		*/
+
+		// Note: If you are using non generic IResult Wrapper, you can still get strongly typed payload by using TypedPayload method
+
+		WeatherForecast[]? weatherForecasts = result.TypedPayload<WeatherForecast[]>();
+
+		if (result.IsSuccess)
+		{
+			return Ok(result);
+		}
+		return BadRequest();
+	}
+}
+
+public static class Weather
+{
+	public static IResultWrapper GetWeatherInfo()
+	{
+		var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+		var weatherForecasts = Enumerable.Range(1, 5).Select(index =>
+				new WeatherForecast
+				{
+					Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+					Summary = summaries[Random.Shared.Next(summaries.Length)],
+					TemperatureC = Random.Shared.Next(-20, 55),
+				})
+				.ToArray();
+
+		if (weatherForecasts != null)
+		{
+			return ResultWrapper.Success(weatherForecasts, "Hello", 300);
+		}
+		return ResultWrapper.Failure("Not Found", 404);
+	}
 }
 ```
+#### Example: How to use Generic IResultWrapper<T>
 
+```csharp
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
+{
+
+	[HttpGet(Name = "GetWeatherForecast")]
+	public ActionResult Get()
+	{
+		var result = Weather.GetWeatherInfo();
+
+		/*
+		// These are the properties available in IResultWrapper
+		var payload = result.Payload; // To get the payload
+		bool isSuccess = result.IsSuccess; // To check whether a success case is returned or a failure
+		string message = result.Message; // Get the failure or success message if you have passed it as an argument
+		int statusCode = result.Code; // Get the failure or success codes if you have passed them as arguments
+		var errors = result.Errors; // To get a list of errors
+		*/
+
+		if (result.IsSuccess)
+		{
+			return Ok(result);
+		}
+		return BadRequest();
+	}
+}
+
+public static class Weather
+{
+	public static IResultWrapper<WeatherForecast[]> GetWeatherInfo()
+	{
+		var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+		var weatherForecasts = Enumerable.Range(1, 5).Select(index =>
+				new WeatherForecast
+				{
+					Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+					Summary = summaries[Random.Shared.Next(summaries.Length)],
+					TemperatureC = Random.Shared.Next(-20, 55),
+				})
+				.ToArray();
+
+		if (weatherForecasts != null)
+		{
+			return ResultWrapper.Success<WeatherForecast[]>(weatherForecasts, "Hello", 300);
+		}
+		return ResultWrapper.Failure<WeatherForecast[]>("Not Found", 404);
+	}
+}
+```
 #### Conclusion
 The ResultWrapper package simplifies the process of creating and working with result success and failure scenarios. It provides a consistent way to handle and represent the results
