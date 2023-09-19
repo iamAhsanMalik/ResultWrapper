@@ -1,6 +1,18 @@
-## Result Wrapper
+## 📦 Package Name Update: RW is now ResponseWrapper
 
-The `ResultWrapper` package provides a set of static methods in the `ResultWrapper` class, allowing you to easily create and work with success and failure scenarios. These wrappers encapsulate various data, including payloads, errors, success and error messages, status codes, and pagination information, providing a standardized way to handle and represent the results of operations.
+We are excited to announce that we have updated the package name from "RW" to "ResponseWrapper" to better reflect the purpose and contents of the package.
+
+## 🚀 What's Changed
+
+- **OldPackage:** [RW](https://www.nuget.org/packages/RW)
+- **NewPackage:** [ResponseWrapper](https://www.nuget.org/packages/ResponseWrapper) 
+- **Upgrade Instructions:** If you are currently using the "RW" package, please update your package references and code accordingly to use [ResponseWrapper](https://www.nuget.org/packages/ResponseWrapper).
+
+We believe this update will provide greater clarity and consistency when working with service result responses. Thank you for your continued support, and we look forward to bringing you more improvements in the future!
+
+## Response Wrapper
+
+The `ResponseWrapper` package provides a set of static methods in the `ResultWrapper` class, allowing you to easily create and work with success and failure scenarios. These wrappers encapsulate various data, including payloads, errors, success and error messages, status codes, and pagination information, providing a standardized way to handle and represent the results of operations.
 
 ## Why to use?
 
@@ -12,7 +24,7 @@ It's important to note that the return type of the service or method where this 
 
 ## Installation
 
-To install the `ResultWrapper` package, you can use the following command in the NuGet Package Manager Console: `dotnet add package RW`
+To install the `ResponseWrapper` package, you can use the following command in the NuGet Package Manager Console: `dotnet add package RW`
 
 Alternatively, you can search for "RW" in the NuGet Package Manager UI and install it from there.
 
@@ -263,4 +275,4 @@ public static class Weather
 }
 ```
 #### Conclusion
-The ResultWrapper package simplifies the process of creating and working with result success and failure scenarios. It provides a consistent way to handle and represent the results
+The Response Wrapper package simplifies the process of creating and working with result success and failure scenarios. It provides a consistent way to handle and represent the results

@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 using RW.Common;
+using RW.Extensions;
 
 namespace RW;
 
@@ -22,29 +23,11 @@ public interface IResultWrapper : IResultBase
     object? Errors { get; set; }
 
     /// <summary>
-    /// Obtain the typed payload, even when using a non-generic result wrapper.
+    /// Losely typed payload conversion to strongly typed
     /// </summary>
-    /// <typeparam name="T">The type of the payload.</typeparam>
-    /// <returns>The typed payload if available; otherwise, null.</returns>
-    T? TypedPayload<T>()
-    {
-        return Payload is T typedPayload ? typedPayload : TypeConversion<T>();
-    }
-
-    private T? TypeConversion<T>()
-    {
-        Type targetType = typeof(T);
-
-        if (Payload is not null && targetType.IsArray && typeof(T).GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
-        {
-            var list = (System.Collections.IList)Payload!;
-            var array = Array.CreateInstance(targetType.GetElementType()!, list.Count);
-            list.CopyTo(array, 0);
-            return (T)Convert.ChangeType(array, targetType);
-        }
-
-        return default!;
-    }
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    T? TypedPayload<T>() => Payload.PayloadConversion<T>();
 }
 /// <summary>
 /// Represents the result of a service operation.

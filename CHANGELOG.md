@@ -7,7 +7,6 @@ Version 1.0.0
 
 🎉 Version 1.0.0 of the [ResultWrapper] package marks its initial release, delivering a robust solution for creating service result responses in a standardized and efficient manner.
 
-
 Version 1.0.1
 🐛 [Bug Fix] Fixed issues in the README.md file and updated the package description.
 
@@ -29,3 +28,13 @@ Version 1.0.4
 📦 Changes: Removed the previously existing extension method used for converting loosely typed payloads to strongly typed ones.
 
 📝 This release introduces the TypedPayload property within the Non-Generic IResultWrapper interface, providing a streamlined method to access strongly typed payloads. Additionally, we've deprecated the previous extension method used for payload conversion, simplifying your codebase and enhancing overall clarity.
+
+Version 1.0.5
+📦 [Package Name Update]: RW to ResponseWrapper, Bug Fixes
+
+📦 Changes:
+- **Package Name Update:** The package name has been changed from "RW" to "ResponseWrapper" to better represent the package's purpose and contents.
+- **Bug Fixes:** This release addresses potential bugs that may occur when converting one collection or array to another type of collection.
+- **Compatibility:** The package has been downgraded to ensure compatibility with .NET 6 while retaining all existing features.
+
+📝 Release Notes: This update brings package compatibility for .NET 6 while retaining all existing features.
