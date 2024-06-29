@@ -1,19 +1,14 @@
-using RW.Common;
-
 namespace RW.Successes;
 
 public sealed class SuccessPayload<T> : IResultWrapper<T>
 {
-    bool IResultBase.IsSuccess { get; set; } = true;
-    public SuccessPayload(T? payload = default)
+    bool IBaseResult.IsSuccess { get; set; } = true;
+    public SuccessPayload(object? payload)
     {
         Payload = payload;
-        ((IResultWrapper)this).Payload = payload;
     }
-    public T? Payload { get; set; }
-    T? IResultWrapper<T>.Errors { get; set; }
-    string IResultBase.Message { get; set; } = string.Empty;
-    int IResultBase.Code { get; set; }
-    object? IResultWrapper.Payload { get; set; }
+    public object? Payload { get; set; }
+    string IBaseResult.Message { get; set; } = string.Empty;
+    int IBaseResult.Code { get; set; }
     object? IResultWrapper.Errors { get; set; }
 }

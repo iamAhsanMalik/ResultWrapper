@@ -38,3 +38,13 @@ Version 1.0.5
 - **Compatibility:** The package has been downgraded to ensure compatibility with .NET 6 while retaining all existing features.
 
 📝 Release Notes: This update brings package compatibility for .NET 6 while retaining all existing features.
+
+
+Version 1.0.6
+📦 Package Name Update: Removed Generic Functions
+📦 Changes:
+This update removes support for generic methods within the package. From this version onwards, only non-generic methods are available.
+To obtain strongly typed results, use the new TypedPayload<T>() method. Replace T with your desired result type when calling this method.
+📝 Release Notes:
+Version 1.0.6 introduces a significant change by discontinuing support for generic methods in the package. Users are encouraged to use TypedPayload<T>() for obtaining typed results instead of generics.
+This change enhances clarity and maintainability by focusing on non-generic implementations, ensuring better compatibility and ease of use in future updates.
