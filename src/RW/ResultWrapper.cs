@@ -1,7 +1,5 @@
 using RW.Models;
-
-using RW.Failures;
-using RW.Successes;
+using RW.Overloads;
 
 namespace RW;
 
@@ -10,29 +8,29 @@ namespace RW;
 /// </summary>
 public static class ResultWrapper
 {
-    public static IResultWrapper Success()
+    public static IResultWrapper Success<T>()
     {
-        return new SuccessEmpty<object>();
+        return new SuccessEmpty<T>();
     }
-    public static IResultWrapper Success(object? payload)
+    public static IResultWrapper Success<T>(T? payload)
     {
-        return new SuccessPayload<object>(payload);
+        return new SuccessPayload<T>(payload);
     }
-    public static IResultWrapper Success(string message, int code)
+    public static IResultWrapper Success<T>(string message, int code)
     {
-        return new SuccessStatus<object>(message, code);
+        return new SuccessStatus<T>(message, code);
     }
-    public static IResultWrapper Success(object? payload, string message, int code)
+    public static IResultWrapper Success<T>(T? payload, string message, int code)
     {
-        return new SuccessPayloadStatus<object>(payload, message, code);
+        return new SuccessPayloadStatus<T>(payload, message, code);
     }
-    public static IResultWrapper Success(object? payload, Pagination paginationInfo)
+    public static IResultWrapper Success<T>(T? payload, Pagination paginationInfo)
     {
-        return new SuccessPaginated<object>(payload, paginationInfo);
+        return new SuccessPaginated<T>(payload, paginationInfo);
     }
-    public static IResultWrapper Success(object? payload, Pagination paginationInfo, string message, int code)
+    public static IResultWrapper Success<T>(T? payload, Pagination paginationInfo, string message, int code)
     {
-        return new SuccessDetailed<object>(payload, message, code, paginationInfo);
+        return new SuccessDetailed<T>(payload, message, code, paginationInfo);
     }
 
     public static IResultWrapper Failure()

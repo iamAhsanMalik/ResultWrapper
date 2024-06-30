@@ -1,7 +1,7 @@
 namespace RW.Extensions;
-public static class ResultWrapperExtensions
+internal static class ResultWrapperExtensions
 {
-    public static T? PayloadConversion<T>(this object? payload)
+    internal static T? PayloadConversion<T>(this object? payload)
     {
         if (payload is T typedPayload)
         {
