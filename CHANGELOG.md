@@ -48,3 +48,8 @@ To obtain strongly typed results, use the new TypedPayload<T>() method. Replace 
 📝 Release Notes:
 Version 1.0.6 introduces a significant change by discontinuing support for generic methods in the package. Users are encouraged to use TypedPayload<T>() for obtaining typed results instead of generics.
 This change enhances clarity and maintainability by focusing on non-generic implementations, ensuring better compatibility and ease of use in future updates.
+
+Version 1.0.7
+📦 Package Name Update: Restructed implemenation
+📦 Changes:
+This update include restructuring the implementation to address generic issues while generating documentation for Swagger when using minimal APIs.

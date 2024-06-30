@@ -26,7 +26,7 @@
             Response, Generic Result Wrapper, Standard Api Response, Api Response Wrapper, Api Result Wrapper</PackageTags>
         <PackageIcon>Innovator Brains Website Dark Logo.png</PackageIcon>
         <Title>Response Wrapper</Title>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <PackageProjectUrl>https://github.com/InnovatorBrains/ResultWrapper</PackageProjectUrl>
         <Copyright>Copyright @2023 - InnovatorBrains</Copyright>
         <PackageReleaseNotes>CHANGELOG.md</PackageReleaseNotes>

@@ -6,13 +6,13 @@ public sealed class SuccessPaginated<T> : IResultWrapper
     public SuccessPaginated(T? payload, Pagination? paginationInfo)
     {
         Payload = payload;
-        PaginationInfo = paginationInfo;
+        Pagination = paginationInfo;
         ((IResultWrapper)this).Payload = payload;
     }
     bool IResultWrapper<object>.IsSuccess { get; set; } = true;
     string IBaseResult.Message { get; set; } = string.Empty;
     int IBaseResult.Code { get; set; }
-    public Pagination? PaginationInfo { get; set; }
+    public Pagination? Pagination { get; set; }
     public T? Payload { get; set; }
     object? IResultWrapper<object>.Errors { get; set; }
     object? IResultWrapper<object>.Payload { get; set; }
@@ -24,13 +24,13 @@ public sealed class SuccessDetailed<T> : IResultWrapper
         Payload = payload;
         Message = successMessage;
         Code = successCode;
-        PaginationInfo = paginationInfo;
+        Pagination = paginationInfo;
         ((IResultWrapper)this).Payload = payload;
     }
     bool IResultWrapper<object>.IsSuccess { get; set; } = true;
     public string Message { get; set; }
     public int Code { get; set; }
-    public Pagination? PaginationInfo { get; set; }
+    public Pagination? Pagination { get; set; }
     public T? Payload { get; set; }
     object? IResultWrapper<object>.Errors { get; set; }
     object? IResultWrapper<object>.Payload { get; set; }
