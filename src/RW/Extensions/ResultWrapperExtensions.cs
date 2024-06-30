@@ -12,17 +12,12 @@ public static class ResultWrapperExtensions
 
         if (IsEnumerable(sourceType) && IsEnumerable(typeof(T)))
         {
-            if (ShouldConvertToArray(sourceType, typeof(T)))
-            {
-                return ConvertToArray<T>(payload);
-            }
-            else if (ShouldConvertToList(sourceType))
-            {
-                return ConvertToList<T>(payload);
-            }
+            return ShouldConvertToArray(sourceType, typeof(T)) ? ConvertToArray<T>(payload) : ShouldConvertToList(sourceType) ? ConvertToList<T>(payload) : default!;
         }
-
-        return default!;
+        else
+        {
+            return ConvertBasedOnSimilarProperties<T>(payload);
+        }
     }
 
     private static bool ShouldConvertToArray(Type sourceType, Type targetType)
@@ -43,17 +38,17 @@ public static class ResultWrapperExtensions
         return (T)(object)array;
     }
 
-    private static T ConvertToList<T>(object payload)
+    private static T ConvertToList<T>(object? payload)
     {
         var genericArgumentType = payload!.GetType().GetGenericArguments()[0];
         var toListMethod = typeof(Enumerable).GetMethod("ToList");
         var toListGenericType = toListMethod!.MakeGenericMethod(genericArgumentType);
-        var list = toListGenericType.Invoke(null, new object[] { payload });
+        var list = toListGenericType.Invoke(null, new object?[] { payload });
 
         if (typeof(T).IsArray)
         {
             var toArrayMethod = typeof(Enumerable).GetMethod("ToArray")?.MakeGenericMethod(genericArgumentType);
-            var array = toArrayMethod?.Invoke(null, new object[] { list! });
+            var array = toArrayMethod?.Invoke(null, new object?[] { list });
             return (T)array!;
         }
 
@@ -71,5 +66,25 @@ public static class ResultWrapperExtensions
         list.CopyTo(array, 0);
         return array;
     }
+    private static T? ConvertBasedOnSimilarProperties<T>(object payload)
+    {
+        var targetType = typeof(T);
+        var targetProperties = targetType.GetProperties();
+
+        // Create a new instance of the target type
+        var targetInstance = Activator.CreateInstance(targetType);
+
+        // Copy matching properties from payload to target object
+        foreach (var targetProperty in targetProperties)
+        {
+            var payloadProperty = payload.GetType().GetProperty(targetProperty.Name);
+            if (payloadProperty != null && payloadProperty.PropertyType == targetProperty.PropertyType)
+            {
+                targetProperty.SetValue(targetInstance, payloadProperty.GetValue(payload));
+            }
+        }
+        return (T?)targetInstance;
+    }
 }
+
 
